@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour
     {
         health = GetComponent<EnemyHealth>();
         movement = GetComponent<EnemyMovement>();
-        
+
         health.OnDie += OnEnemyDeath;
     }
 

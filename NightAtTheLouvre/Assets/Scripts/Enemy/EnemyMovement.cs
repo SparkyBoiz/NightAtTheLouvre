@@ -21,15 +21,11 @@ public class EnemyMovement : MonoBehaviour
     public float patrolRadius = 15f; 
 
     private NavMeshAgent agent;
-    private Vector3 anchorPoint; // The "home" position
     private Coroutine stuckCheckCoroutine;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-
-        // Set the anchor point on awake (Fix for drifting)
-        anchorPoint = transform.position;
 
         // Snap to NavMesh on start
         NavMeshHit hit;
@@ -59,7 +55,7 @@ public class EnemyMovement : MonoBehaviour
         
         agent.speed = patrolSpeed;
 
-        Vector3 randomPoint = anchorPoint + Random.insideUnitSphere * patrolRadius;
+        Vector3 randomPoint = transform.position + Random.insideUnitSphere * patrolRadius;
         NavMeshHit hit;
 
         // Find a random point on the NavMesh within the patrol radius
@@ -72,11 +68,10 @@ public class EnemyMovement : MonoBehaviour
         }
 
         // Fallback if no point is found, which is unlikely if the anchor is on a NavMesh.
-        // This can happen if patrolRadius is very small or the NavMesh is fragmented.
-        Debug.LogWarning("AI Error: Could not find a valid patrol point on the NavMesh. Returning to anchor.");
-        agent.SetDestination(anchorPoint);
-        agent.isStopped = false;
-        StartStuckCheck();
+        // This can happen if patrolRadius is very small or the NavMesh is fragmented around the agent.
+        Debug.LogWarning("AI Error: Could not find a valid patrol point on the NavMesh. Agent will stop.");
+        agent.isStopped = true;
+        StopStuckCheck();
     }
 
     // --- THIS IS THE MISSING METHOD ---
@@ -174,9 +169,9 @@ public class EnemyMovement : MonoBehaviour
     // --- GIZMOS ---
     private void OnDrawGizmosSelected()
     {
-        // Draw the Patrol Radius (Blue circle) around the ANCHOR point
+        // Draw the Patrol Radius (Blue circle) around the agent's current position
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(anchorPoint, patrolRadius); // Use anchorPoint
+        Gizmos.DrawWireSphere(transform.position, patrolRadius);
         
         if (agent != null && agent.hasPath && !agent.isStopped)
         {
