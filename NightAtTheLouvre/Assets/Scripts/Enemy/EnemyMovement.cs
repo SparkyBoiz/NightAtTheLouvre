@@ -11,8 +11,6 @@ public class EnemyMovement : MonoBehaviour
     public float idleSpeed = 2f;
     [Tooltip("The minimum speed for the agent to be considered 'moving'.")]
     public float minMoveSpeed = 0.1f;
-
-    public float fleeSpeed = 6f;
     [Tooltip("How close the agent must be to a point to consider it reached.")]
     public float stoppingDistance = 0.1f; // Make sure this is low
 
@@ -73,35 +71,6 @@ public class EnemyMovement : MonoBehaviour
         agent.isStopped = true;
         StopStuckCheck();
     }
-
-    // --- THIS IS THE MISSING METHOD ---
-    /// <summary>
-    /// Calculates a position away from the target and sets the destination on the NavMesh.
-    /// </summary>
-    public void FleeFrom(Transform target, float fleeDistance)
-    {
-        if (target == null || !agent.isActiveAndEnabled) return;
-        
-        agent.speed = fleeSpeed;
-        
-        Vector3 directionToTarget = transform.position - target.position;
-        Vector3 fleePosition = transform.position + directionToTarget.normalized * fleeDistance;
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(fleePosition, out hit, fleeDistance, NavMesh.AllAreas) && agent.CalculatePath(hit.position, agent.path))
-        {
-            agent.SetDestination(hit.position);
-            agent.isStopped = false;
-            StartStuckCheck();
-        }
-        else
-        {
-            // If no valid flee position is found, try to find any random valid point to move to.
-            Debug.LogWarning("AI Error: Could not find a valid flee point. Finding random patrol point.");
-            SetRandomPatrolDestination();
-        }
-    }
-    // --- END OF MISSING METHOD ---
 
     public void StopMoving()
     {
