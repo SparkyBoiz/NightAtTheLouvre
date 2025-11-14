@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [Tooltip("The speed at which the player moves.")]
     public float moveSpeed = 5f;
-
     // A reference to the Rigidbody2D component
     private Rigidbody2D rb;
     
@@ -40,15 +39,10 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = value.Get<Vector2>();
     }
 
-    // FixedUpdate is used for physics calculations
-    void FixedUpdate()
+    void Update()
     {
-        if (rb != null)
-        {
-            // Apply velocity: direction vector * speed
-            // The Vector2 received from the action is already normalized 
-            // if you set up the WASD composite correctly in the Input Actions Asset.
-            rb.linearVelocity = moveDirection * moveSpeed;
-        }
+        // Compute movement delta
+        Vector3 delta = moveDirection * moveSpeed * Time.deltaTime;
+        transform.position += delta;
     }
 }
