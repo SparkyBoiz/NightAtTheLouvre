@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9002153703602390536}
   - component: {fileID: 1581015741551729923}
+  - component: {fileID: 2126071763887121492}
   - component: {fileID: 4001280793708308240}
   - component: {fileID: 3556169664350014362}
   - component: {fileID: 7506650316343438210}
@@ -49,7 +50,7 @@ GameObject:
   - component: {fileID: 7722186952879679990}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +129,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2126071763887121492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4271471618953947460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ecc1e073c8ce74fb0fd3c5b1654df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!58 &4001280793708308240
 CircleCollider2D:
   m_ObjectHideFlags: 0
