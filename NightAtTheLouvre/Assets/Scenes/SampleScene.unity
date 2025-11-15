@@ -1277,7 +1277,6 @@ MonoBehaviour:
   patrolSpeed: 3
   idleSpeed: 2
   minMoveSpeed: 0.1
-  fleeSpeed: 1
   stoppingDistance: 0.5
   patrolRadius: 4.78
 --- !u!114 &2106349109
@@ -1307,10 +1306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   currentState: 0
   playerTarget: {fileID: 725521578}
-  detectionRadius: 4.91
-  fieldOfViewAngle: 56
-  fleeRange: 3.04
-  patrolWaitTime: 3
 --- !u!195 &2106349111
 NavMeshAgent:
   m_ObjectHideFlags: 0
