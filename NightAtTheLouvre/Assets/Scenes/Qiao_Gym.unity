@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d83a087fe87be043b78809a227de13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundWordTester
-  interval: 2
+  interval: 1
 --- !u!114 &1624135315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1267,7 +1267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d83a087fe87be043b78809a227de13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundWordTester
-  interval: 1
+  interval: 0.9
 --- !u!114 &1688508727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1781,7 +1781,6 @@ MonoBehaviour:
   patrolSpeed: 3
   idleSpeed: 2
   minMoveSpeed: 0.1
-  fleeSpeed: 1
   stoppingDistance: 0.5
   patrolRadius: 4.78
 --- !u!114 &2106349109
@@ -1811,9 +1810,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   currentState: 0
   playerTarget: {fileID: 725521578}
-  detectionRadius: 4.91
-  fieldOfViewAngle: 56
-  fleeRange: 3.04
 --- !u!195 &2106349111
 NavMeshAgent:
   m_ObjectHideFlags: 0
