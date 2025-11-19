@@ -29,24 +29,26 @@ public class PlayerShoot : MonoBehaviour
     {
         if (value.isPressed && Time.time >= nextFireTime)
         {
-            nextFireTime = Time.time + fireRate;
-            Shoot();
+            TryToShoot();
         }
     }
 
-    void Shoot()
+    void TryToShoot()
     {
         if (currentAmmo <= 0)
         {
             Debug.Log("Out of ammo!");
-            return;
+            return; // Don't shoot and don't apply cooldown
         }
-
+    
         if (projectilePrefab == null || firePoint == null)
         {
             Debug.LogError("Projectile Prefab or Fire Point is not assigned in the Inspector!");
             return;
         }
+
+        // A shot can be fired, so set the cooldown.
+        nextFireTime = Time.time + fireRate;
 
         currentAmmo--;
         Debug.Log($"Fired! Ammo remaining: {currentAmmo}");
