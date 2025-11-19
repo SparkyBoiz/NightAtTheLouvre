@@ -25,18 +25,16 @@ public class EnemyMovement : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        // Snap to NavMesh on start
         NavMeshHit hit;
         if (agent != null && NavMesh.SamplePosition(transform.position, out hit, 5f, NavMesh.AllAreas))
         {
             transform.position = hit.position; 
         }
 
-        // Setup Agent
         agent.updateRotation = false; 
         agent.updatePosition = true;
         agent.stoppingDistance = stoppingDistance;
-        agent.autoBraking = true; // Recommended
+        agent.autoBraking = true;
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
@@ -45,7 +43,6 @@ public class EnemyMovement : MonoBehaviour
         }
     }
     
-    // --- MOVEMENT METHODS ---
 
     public void SetRandomPatrolDestination()
     {
@@ -56,7 +53,6 @@ public class EnemyMovement : MonoBehaviour
         Vector3 randomPoint = transform.position + Random.insideUnitSphere * patrolRadius;
         NavMeshHit hit;
 
-        // Find a random point on the NavMesh within the patrol radius
         if (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
@@ -65,8 +61,6 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        // Fallback if no point is found, which is unlikely if the anchor is on a NavMesh.
-        // This can happen if patrolRadius is very small or the NavMesh is fragmented around the agent.
         Debug.LogWarning("AI Error: Could not find a valid patrol point on the NavMesh. Agent will stop.");
         agent.isStopped = true;
         StopStuckCheck();
@@ -85,10 +79,8 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!agent.isActiveAndEnabled) return true;
 
-        // If the agent doesn't have a path, it has "reached" it's destination.
         if (!agent.hasPath || agent.pathPending) return false;
 
-        // Check if the agent is close to the destination
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             StopStuckCheck();
@@ -115,7 +107,7 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator CheckIfStuck()
     {
-        yield return new WaitForSeconds(2.0f); // Initial delay
+        yield return new WaitForSeconds(2.0f);
 
         while (agent.hasPath && !agent.pathPending)
         {
@@ -125,7 +117,7 @@ public class EnemyMovement : MonoBehaviour
                 SetRandomPatrolDestination();
                 yield break; // Exit coroutine
             }
-            yield return new WaitForSeconds(1.0f); // Check every second
+            yield return new WaitForSeconds(1.0f);
         }
     }
 
@@ -135,10 +127,8 @@ public class EnemyMovement : MonoBehaviour
         return agent.pathStatus != NavMeshPathStatus.PathInvalid;
     }
 
-    // --- GIZMOS ---
     private void OnDrawGizmosSelected()
     {
-        // Draw the Patrol Radius (Blue circle) around the agent's current position
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, patrolRadius);
         

@@ -1,20 +1,17 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // Import the New Input System namespace
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     [Tooltip("The speed at which the player moves.")]
     public float moveSpeed = 5f;
-    // A reference to the Rigidbody2D component
     private Rigidbody2D rb;
     
-    // A private variable to store the Vector2 value from the "Move" action
     private Vector2 moveDirection;
 
     void Awake()
     {
-        // Get the Rigidbody2D component attached to this GameObject
         rb = GetComponent<Rigidbody2D>();
         
         if (rb == null)
@@ -22,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Rigidbody2D component not found! Please attach one for movement.");
         }
 
-        // Ensure the Rigidbody2D's gravity scale is zero for top-down movement
         if (rb != null)
         {
             rb.gravityScale = 0f;
@@ -30,22 +26,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // This method is automatically called by the PlayerInput component 
-    // when the "Movement" action's value changes (if Behavior is set to "Send Messages").
-    // The name 'OnMove' must match the action name in your Input Actions Asset.
     public void OnMove(InputValue value)
     {
-        // Read the Vector2 value from the input action (WASD keys map to a 2D Vector)
         moveDirection = value.Get<Vector2>();
     }
 
     void FixedUpdate()
     {
-        // Use the Rigidbody2D to move the player for smoother, physics-based movement
         if (rb != null)
         {
-            // Using rb.MovePosition for physics-based movement that respects collisions better
-            // than setting velocity directly in some cases.
             Vector2 newPosition = rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
         }

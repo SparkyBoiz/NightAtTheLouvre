@@ -1,17 +1,15 @@
 using UnityEngine;
-using System.Collections; // Required for Coroutines
+using System.Collections;
 
 public class EnemyController : MonoBehaviour
 {
-    // --- ENUMERATIONS ---
     public enum State { Patrol, Dead }
     [Header("State")]
     [Tooltip("The current state of the enemy AI.")]
     public State currentState = State.Patrol;
 
-    // --- ASSIGNMENTS ---
     [Header("Component References")]
-    public Transform playerTarget; // Must be assigned in the Inspector
+    public Transform playerTarget;
     private EnemyHealth health;
     private EnemyMovement movement;
 
@@ -26,7 +24,6 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        // FIX: Use a coroutine to ensure the NavMeshAgent is initialized before the first movement call.
         StartCoroutine(StartAILogic());
         var agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 		agent.updateRotation = false;
@@ -35,7 +32,6 @@ public class EnemyController : MonoBehaviour
 
     private IEnumerator StartAILogic()
     {
-        // Wait one frame until the NavMeshAgent is guaranteed to be on the NavMesh
         yield return null; 
 
         if (currentState == State.Patrol)
@@ -49,7 +45,6 @@ public class EnemyController : MonoBehaviour
         Debug.Log($"Enemy '{gameObject.name}' current state: {currentState}");
         if (currentState == State.Dead) return;
 
-        // --- BEHAVIOR LOGIC ---
         switch (currentState)
         {
             case State.Patrol:
