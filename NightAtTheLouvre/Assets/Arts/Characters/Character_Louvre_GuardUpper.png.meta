@@ -1,22 +1,25 @@
 fileFormatVersion: 2
-guid: 9e1adf1681273004b90fb675aa357e40
+guid: b5ccb199e8af63a4bb994817020579c5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4624182976604710639
-    second: Character_Louvre_Guard-Sheet_0
+      213: 5324456787737396953
+    second: Character_Louvre_GuardUpper_0
   - first:
-      213: -6296712311841934556
-    second: Character_Louvre_Guard-Sheet_1
+      213: 4252978009567680994
+    second: Character_Louvre_GuardUpper_1
   - first:
-      213: 7858748162083602662
-    second: Character_Louvre_Guard-Sheet_2
+      213: 1401828199072614989
+    second: Character_Louvre_GuardUpper_2
   - first:
-      213: 933545326740965056
-    second: Character_Louvre_Guard-Sheet_3
+      213: 463737294598395839
+    second: Character_Louvre_GuardUpper_3
   - first:
-      213: 2819666194007205383
-    second: Character_Louvre_Guard-Sheet_4
+      213: -1284157447825127854
+    second: Character_Louvre_GuardUpper_4
+  - first:
+      213: -2559123076310109521
+    second: Character_Louvre_GuardUpper_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -138,7 +141,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character_Louvre_Guard-Sheet_0
+      name: Character_Louvre_GuardUpper_0
       rect:
         serializedVersion: 2
         x: 0
@@ -153,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 119511f251a93dfb0800000000000000
-      internalID: -4624182976604710639
+      spriteID: 9d6410ffc3544e940800000000000000
+      internalID: 5324456787737396953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Louvre_Guard-Sheet_1
+      name: Character_Louvre_GuardUpper_1
       rect:
         serializedVersion: 2
         x: 256
@@ -175,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42335d783859d98a0800000000000000
-      internalID: -6296712311841934556
+      spriteID: 2e954d967fc950b30800000000000000
+      internalID: 4252978009567680994
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Louvre_Guard-Sheet_2
+      name: Character_Louvre_GuardUpper_2
       rect:
         serializedVersion: 2
         x: 512
@@ -197,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6e04f34e0d1ef0d60800000000000000
-      internalID: 7858748162083602662
+      spriteID: d4a49d1e15b447310800000000000000
+      internalID: 1401828199072614989
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Louvre_Guard-Sheet_3
+      name: Character_Louvre_GuardUpper_3
       rect:
         serializedVersion: 2
         x: 768
@@ -219,14 +222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0c60f1e478e94fc00800000000000000
-      internalID: 933545326740965056
+      spriteID: fb753a9cc968f6600800000000000000
+      internalID: 463737294598395839
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_Louvre_Guard-Sheet_4
+      name: Character_Louvre_GuardUpper_4
       rect:
         serializedVersion: 2
         x: 1024
@@ -241,8 +244,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7062af6d677712720800000000000000
-      internalID: 2819666194007205383
+      spriteID: 25606beda91cd2ee0800000000000000
+      internalID: -1284157447825127854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Louvre_GuardUpper_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa2f704fe1b2c7cd0800000000000000
+      internalID: -2559123076310109521
       vertices: []
       indices: 
       edges: []
@@ -251,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 921fbdfa006cc7e4492ec67ae184059d
+    spriteID: 69b7ab622f1ccd04380139496072af75
     internalID: 0
     vertices: []
     indices: 
@@ -263,11 +288,12 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Character_Louvre_Guard-Sheet_0: -4624182976604710639
-      Character_Louvre_Guard-Sheet_1: -6296712311841934556
-      Character_Louvre_Guard-Sheet_2: 7858748162083602662
-      Character_Louvre_Guard-Sheet_3: 933545326740965056
-      Character_Louvre_Guard-Sheet_4: 2819666194007205383
+      Character_Louvre_GuardUpper_0: 5324456787737396953
+      Character_Louvre_GuardUpper_1: 4252978009567680994
+      Character_Louvre_GuardUpper_2: 1401828199072614989
+      Character_Louvre_GuardUpper_3: 463737294598395839
+      Character_Louvre_GuardUpper_4: -1284157447825127854
+      Character_Louvre_GuardUpper_5: -2559123076310109521
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
