@@ -39,10 +39,15 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = value.Get<Vector2>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // Compute movement delta
-        Vector3 delta = moveDirection * moveSpeed * Time.deltaTime;
-        transform.position += delta;
+        // Use the Rigidbody2D to move the player for smoother, physics-based movement
+        if (rb != null)
+        {
+            // Using rb.MovePosition for physics-based movement that respects collisions better
+            // than setting velocity directly in some cases.
+            Vector2 newPosition = rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(newPosition);
+        }
     }
 }
