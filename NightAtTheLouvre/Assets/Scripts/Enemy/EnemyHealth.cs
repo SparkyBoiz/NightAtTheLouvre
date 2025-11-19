@@ -48,14 +48,14 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject, 3f);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Projectile projectile = collision.gameObject.GetComponent<Projectile>();
+        Projectile projectile = other.gameObject.GetComponent<Projectile>();
         if (projectile != null)
         {
             TakeDamage(1); 
 
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
         }
     }
 }
