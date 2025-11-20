@@ -1,11 +1,20 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Treasure : MonoBehaviour
 {
+    private static int stolenTreasureCount = 0;
     private bool isPickedUp = false;
 
     [Tooltip("The local position offset when attached to the enemy.")]
     public Vector3 pickupOffset = Vector3.zero;
+
+    [Tooltip("The name of the scene to load when 3 treasures are stolen.")]
+    public string gameOverSceneName = "GameOverScene";
+
+    [Tooltip("The number of treasures that need to be stolen to trigger the game over.")]
+    [Min(1)]
+    public int treasuresForGameOver = 3;
 
     /// <summary>
     /// Called when another collider enters this object's trigger collider.
@@ -13,14 +22,12 @@ public class Treasure : MonoBehaviour
     /// <param name="other">The other Collider involved in this collision.</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"Treasure '{gameObject.name}' 2D trigger collided with '{other.name}' (Tag: {other.tag})");
         // Check if the treasure has already been picked up and if the colliding object is an enemy.
         if (!isPickedUp && other.CompareTag("Enemy"))
         {
             EnemyController controller = other.GetComponentInParent<EnemyController>();
             if (controller != null && !controller.hasTreasure)
             {
-                Debug.Log($"Treasure '{gameObject.name}' is being picked up by '{other.name}'.");
                 PickUp(other.transform);
                 controller.hasTreasure = true;
             }
@@ -58,4 +65,26 @@ public class Treasure : MonoBehaviour
 
         isPickedUp = false;
     }
+
+    /// <summary>
+    /// Resets the stolen treasure count, useful for when starting a new game.
+    /// </summary>
+    public static void ResetStolenTreasureCount()
+    {
+        stolenTreasureCount = 0;
+    }
+
+    /// <summary>
+    /// Increments the stolen treasure count.
+    /// </summary>
+    public static void IncrementStolenTreasureCount()
+    {
+        stolenTreasureCount++;
+    }
+
+    /// <summary>
+    /// Gets the current stolen treasure count.
+    /// </summary>
+    /// <returns>The number of treasures currently considered stolen.</returns>
+    public static int GetStolenTreasureCount() => stolenTreasureCount;
 }

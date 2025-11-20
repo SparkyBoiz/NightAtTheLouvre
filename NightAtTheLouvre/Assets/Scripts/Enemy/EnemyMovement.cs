@@ -52,19 +52,21 @@ public class EnemyMovement : MonoBehaviour
         
         agent.speed = patrolSpeed;
 
-        Vector3 randomPoint = transform.position + Random.insideUnitSphere * patrolRadius;
-        NavMeshHit hit;
-
-        if (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, NavMesh.AllAreas))
+        for (int i = 0; i < 10; i++) // Try up to 10 times to find a valid point
         {
-            agent.SetDestination(hit.position);
-            agent.isStopped = false;
-            StartStuckCheck();
-            return;
-        }
+            Vector3 randomPoint = transform.position + Random.insideUnitSphere * patrolRadius;
+            NavMeshHit hit;
 
-        agent.isStopped = true;
-        StopStuckCheck();
+            if (NavMesh.SamplePosition(randomPoint, out hit, patrolRadius, NavMesh.AllAreas))
+            {
+                agent.SetDestination(hit.position);
+                agent.isStopped = false;
+                StartStuckCheck();
+                return;
+            }
+        }
+        // If we can't find a valid point after 10 tries, stop moving.
+        StopMoving();
     }
 
     public void SetDestination(Vector3 destination, float speed)
@@ -131,8 +133,10 @@ public class EnemyMovement : MonoBehaviour
         {
             if (agent.velocity.sqrMagnitude < minMoveSpeed * minMoveSpeed && agent.remainingDistance > agent.stoppingDistance)
             {
-                SetRandomPatrolDestination();
-                yield break; // Exit coroutine
+                // Instead of just setting a new patrol destination, try recalculating the path to the current destination first.
+                // If that fails, then find a new random destination.
+                agent.SetDestination(agent.destination);
+                yield return new WaitForSeconds(0.5f); // Give it a moment to recalculate
             }
             yield return new WaitForSeconds(1.0f);
         }

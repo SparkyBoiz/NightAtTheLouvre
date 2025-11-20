@@ -105,6 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1a5d7d181478e4081fea336ffb1bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Treasure
+  pickupOffset: {x: 1, y: 0, z: 0}
+  gameOverSceneName: Level1
+  treasuresForGameOver: 3
 --- !u!61 &7783545984580938975
 BoxCollider2D:
   m_ObjectHideFlags: 0

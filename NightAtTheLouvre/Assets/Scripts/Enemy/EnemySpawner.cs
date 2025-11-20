@@ -22,13 +22,11 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyPrefab == null)
         {
-            Debug.LogError("Enemy prefab is not assigned in the EnemySpawner.");
             return;
         }
 
         if (spawnPoints.Length == 0)
         {
-            Debug.LogError("No spawn points assigned in the EnemySpawner.");
             return;
         }
 
