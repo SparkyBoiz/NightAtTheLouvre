@@ -30,6 +30,12 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
+        EnemyExit enemyExit = FindObjectOfType<EnemyExit>();
+        if (enemyExit != null)
+        {
+            enemyExit.OnExit += () => currentEnemyCount--;
+        }
+
         StartCoroutine(SpawnEnemies());
     }
 

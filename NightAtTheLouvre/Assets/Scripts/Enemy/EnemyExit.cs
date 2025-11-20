@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EnemyExit : MonoBehaviour
 {
+    public System.Action OnExit;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -14,15 +15,10 @@ public class EnemyExit : MonoBehaviour
                 Treasure treasure = other.GetComponentInChildren<Treasure>();
                 if (treasure != null)
                 {
-                    if (Treasure.GetStolenTreasureCount() >= treasure.treasuresForGameOver - 1)
-                    {
-                        SceneManager.LoadScene(treasure.gameOverSceneName);
-                    }
-
-                    Treasure.IncrementStolenTreasureCount();
+                    TreasureManager.Instance.IncrementStolenTreasureCount();
+                    OnExit?.Invoke();
+                    Destroy(other.gameObject);
                 }
-
-                Destroy(other.gameObject);
             }
         }
     }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -7,6 +8,18 @@ public class EnemyController : MonoBehaviour
     [Header("State")]
     [Tooltip("The current state of the enemy AI.")]
     public State currentState = State.Patrol;
+
+    private bool _canMove = true;
+    public bool canMove
+    {
+        get { return _canMove; }
+        set
+        {
+            _canMove = value;
+            if (movement != null && movement.agent != null)
+                movement.agent.isStopped = !_canMove;
+        }
+    }
     public bool hasTreasure = false;
 
     [Header("Component References")]
@@ -55,7 +68,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (currentState == State.Dead) return;
+        if (currentState == State.Dead || !canMove) return;
 
         switch (currentState)
         {
