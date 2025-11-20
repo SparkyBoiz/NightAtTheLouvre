@@ -90,20 +90,17 @@ public class EnemyController : MonoBehaviour
                 {
                     if (fleeDestination != null)
                     {
-                        Debug.Log($"Enemy '{gameObject.name}' has treasure, switching to Fleeing state.");
                         currentState = State.Fleeing;
                         movement.SetDestination(fleeDestination.position, movement.fleeSpeed);
                     }
                     else
                     {
-                        Debug.LogWarning($"Enemy '{gameObject.name}' has no flee destination set. Returning to Patrol state.");
                         currentState = State.Patrol;
                         movement.SetRandomPatrolDestination();
                     }
                 }
                 else if (treasureTarget == null || !treasureTarget.gameObject.activeInHierarchy)
                 {
-                    Debug.Log($"Enemy '{gameObject.name}' lost its treasure target, returning to Patrol state.");
                     currentState = State.Patrol;
                     movement.SetRandomPatrolDestination();
                 }
@@ -133,7 +130,6 @@ public class EnemyController : MonoBehaviour
 
             if (hit.collider != null && hit.collider.CompareTag("Treasure"))
             {
-                Debug.Log($"Enemy '{gameObject.name}' SAW treasure. Switching to SeekingTreasure state.");
                 treasureTarget = hit.transform;
                 currentState = State.SeekingTreasure;
                 movement.SetDestination(treasureTarget.position);
@@ -153,7 +149,6 @@ public class EnemyController : MonoBehaviour
             Treasure treasure = GetComponentInChildren<Treasure>();
             if (treasure != null)
             {
-                Debug.Log($"Enemy '{gameObject.name}' dropped treasure upon death.");
                 treasure.Drop();
             }
         }
@@ -163,7 +158,6 @@ public class EnemyController : MonoBehaviour
     {
         if (currentState == State.Patrol)
         {
-            Debug.Log($"Enemy '{gameObject.name}' is stuck while patrolling. Finding new patrol point.");
             movement.SetRandomPatrolDestination();
         }
         else

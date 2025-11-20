@@ -38,7 +38,6 @@ public class TrapPlacer : MonoBehaviour
 
     void Update()
     {
-        // Clean up any destroyed traps from the list
         _activeTraps.RemoveAll(item => item == null);
 
         if (placeTrapAction.WasPressedThisFrame())
@@ -56,19 +55,16 @@ public class TrapPlacer : MonoBehaviour
     {
         if (trapPrefab == null)
         {
-            Debug.LogWarning("Trap prefab is not assigned in the TrapPlacer script.");
             return;
         }
 
         if (_activeTraps.Count >= maxTraps)
         {
-            Debug.Log("Cannot place more traps. Maximum limit reached.");
             return;
         }
 
         if (Time.time < _lastTrapTime + trapPlacementCooldown)
         {
-            Debug.Log("Trap placement is on cooldown.");
             return;
         }
 
@@ -81,12 +77,10 @@ public class TrapPlacer : MonoBehaviour
     {
         if (_pickupableTraps.Count > 0)
         {
-            // Pick up the most recently entered trap trigger
             Trap trapToPickup = _pickupableTraps[_pickupableTraps.Count - 1];
             if (trapToPickup != null)
             {
                 _pickupableTraps.Remove(trapToPickup);
-                // The active traps list will be cleaned up in the next Update frame.
                 Destroy(trapToPickup.gameObject);
             }
         }

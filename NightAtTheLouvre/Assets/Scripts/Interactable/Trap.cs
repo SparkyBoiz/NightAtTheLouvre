@@ -65,7 +65,6 @@ public class Trap : MonoBehaviour
 
         if (enemyController != null)
         {
-            // Stop the enemy
             enemyController.canMove = false;
         }
 
