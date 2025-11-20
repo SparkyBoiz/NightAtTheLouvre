@@ -61,5 +61,8 @@ TagManager:
   - name: Walls
     uniqueID: 4279001055
     locked: 0
+  - name: Sound
+    uniqueID: 3311848751
+    locked: 0
   m_RenderingLayers:
   - Default

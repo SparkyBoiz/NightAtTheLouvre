@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
     
     private Vector2 moveDirection;
+    public bool IsMoving => moveDirection.sqrMagnitude > 0.0001f;
 
     void Awake()
     {

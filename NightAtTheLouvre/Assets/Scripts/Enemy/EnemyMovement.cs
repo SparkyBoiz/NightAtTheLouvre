@@ -22,6 +22,10 @@ public class EnemyMovement : MonoBehaviour
 
     public NavMeshAgent agent { get; private set; }
     private Coroutine stuckCheckCoroutine;
+    public bool IsMoving => agent != null &&
+                            agent.isActiveAndEnabled &&
+                            !agent.isStopped &&
+                            agent.velocity.sqrMagnitude > minMoveSpeed * minMoveSpeed;
 
     public System.Action OnStuck;
 
