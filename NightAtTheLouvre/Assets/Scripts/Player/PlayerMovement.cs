@@ -40,11 +40,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (moveDirection.magnitude > 0)
             {
-                animator.SetBool("IsMoving", true); // This will now work correctly
+                animator.SetBool("IsMoving", true);
             }
             else
             {
-                animator.SetBool("IsMoving", false); // This will now work correctly
+                animator.SetBool("IsMoving", false);
             }
         }
     }

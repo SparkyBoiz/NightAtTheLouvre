@@ -14,9 +14,6 @@ public class EnemyExit : MonoBehaviour
                 Treasure treasure = other.GetComponentInChildren<Treasure>();
                 if (treasure != null)
                 {
-                    // Check if the game over condition is met.
-                    // We check if the current count is one less than the game over threshold.
-                    // After this enemy escapes, the count will be incremented, meeting the threshold.
                     if (Treasure.GetStolenTreasureCount() >= treasure.treasuresForGameOver - 1)
                     {
                         SceneManager.LoadScene(treasure.gameOverSceneName);
@@ -25,7 +22,6 @@ public class EnemyExit : MonoBehaviour
                     Treasure.IncrementStolenTreasureCount();
                 }
 
-                // Destroy the enemy GameObject. Since the treasure is a child, it will also be destroyed.
                 Destroy(other.gameObject);
             }
         }

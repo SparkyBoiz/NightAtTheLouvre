@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            return; // Ignore collision with the player
+            return;
         }
 
         Destroy(gameObject);

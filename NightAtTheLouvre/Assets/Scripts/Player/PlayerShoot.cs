@@ -38,7 +38,7 @@ public class PlayerShoot : MonoBehaviour
         if (currentAmmo <= 0)
         {
             Debug.Log("Out of ammo!");
-            return; // Don't shoot and don't apply cooldown
+            return;
         }
     
         if (projectilePrefab == null || firePoint == null)
@@ -47,7 +47,6 @@ public class PlayerShoot : MonoBehaviour
             return;
         }
 
-        // A shot can be fired, so set the cooldown.
         nextFireTime = Time.time + fireRate;
 
         currentAmmo--;

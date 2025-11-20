@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour
     [Tooltip("The minimum speed for the agent to be considered 'moving'.")]
     public float minMoveSpeed = 0.1f;
     [Tooltip("How close the agent must be to a point to consider it reached.")]
-    public float stoppingDistance = 0.1f; // Make sure this is low
+    public float stoppingDistance = 0.1f;
 
     [Header("Patrol Data (Dynamic)")]
     [Tooltip("The radius around the enemy's anchor point to patrol.")]
@@ -22,6 +22,8 @@ public class EnemyMovement : MonoBehaviour
 
     public NavMeshAgent agent { get; private set; }
     private Coroutine stuckCheckCoroutine;
+
+    public System.Action OnStuck;
 
     void Awake()
     {
@@ -52,7 +54,7 @@ public class EnemyMovement : MonoBehaviour
         
         agent.speed = patrolSpeed;
 
-        for (int i = 0; i < 10; i++) // Try up to 10 times to find a valid point
+        for (int i = 0; i < 10; i++)
         {
             Vector3 randomPoint = transform.position + Random.insideUnitSphere * patrolRadius;
             NavMeshHit hit;
@@ -65,7 +67,6 @@ public class EnemyMovement : MonoBehaviour
                 return;
             }
         }
-        // If we can't find a valid point after 10 tries, stop moving.
         StopMoving();
     }
 
@@ -133,10 +134,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if (agent.velocity.sqrMagnitude < minMoveSpeed * minMoveSpeed && agent.remainingDistance > agent.stoppingDistance)
             {
-                // Instead of just setting a new patrol destination, try recalculating the path to the current destination first.
-                // If that fails, then find a new random destination.
-                agent.SetDestination(agent.destination);
-                yield return new WaitForSeconds(0.5f); // Give it a moment to recalculate
+                OnStuck?.Invoke();
             }
             yield return new WaitForSeconds(1.0f);
         }
