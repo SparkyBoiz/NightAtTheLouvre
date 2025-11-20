@@ -21,7 +21,6 @@ public class EnemyHealth : MonoBehaviour
         if (IsDead) return;
 
         currentHealth -= damageAmount;
-        Debug.Log(gameObject.name + " took " + damageAmount + " damage. Remaining health: " + currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -42,8 +41,6 @@ public class EnemyHealth : MonoBehaviour
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null) rb.isKinematic = true; 
-
-        Debug.Log(gameObject.name + " has died.");
 
         Destroy(gameObject, 3f);
     }

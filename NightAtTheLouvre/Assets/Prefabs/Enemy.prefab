@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 8039802611037368533}
   - component: {fileID: 973613445144570789}
   - component: {fileID: 7883983344719132980}
-  m_Layer: 0
+  - component: {fileID: 7668380420684158389}
+  m_Layer: 3
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +116,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.33
-  m_BaseOffset: 0
+  m_BaseOffset: 0.52
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!50 &5926459541991264431
@@ -204,7 +205,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   currentState: 0
-  playerTarget: {fileID: 0}
+  hasTreasure: 0
+  playerTarget: {fileID: 9002153703602390536, guid: cf1c01e987ac594449880f9d99922214, type: 3}
+  fleeDestination: {fileID: 6649489954607172547, guid: d5b398c70a9b6734687dfaaf639bb333, type: 3}
+  detectionRange: 10
+  viewAngle: 47
+  rayCount: 10
 --- !u!114 &973613445144570789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +237,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   patrolSpeed: 3
+  fleeSpeed: 5
   idleSpeed: 2
   minMoveSpeed: 0.1
   stoppingDistance: 0.5
-  patrolRadius: 9.73
+  patrolRadius: 10
+--- !u!114 &7668380420684158389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222786569687081168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76139a33f9f6e6c439d5e32c9316c02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyLook
+  rotationSpeed: 10

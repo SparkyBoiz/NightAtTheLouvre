@@ -7,6 +7,8 @@ public class EnemyMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float patrolSpeed = 3f;
+    [Tooltip("The speed at which the agent moves when fleeing with treasure.")]
+    public float fleeSpeed = 5f;
     [Tooltip("The speed at which the agent moves when idling or returning to its anchor.")]
     public float idleSpeed = 2f;
     [Tooltip("The minimum speed for the agent to be considered 'moving'.")]
@@ -18,7 +20,7 @@ public class EnemyMovement : MonoBehaviour
     [Tooltip("The radius around the enemy's anchor point to patrol.")]
     public float patrolRadius = 15f; 
 
-    private NavMeshAgent agent;
+    public NavMeshAgent agent { get; private set; }
     private Coroutine stuckCheckCoroutine;
 
     void Awake()
@@ -61,10 +63,26 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        Debug.LogWarning("AI Error: Could not find a valid patrol point on the NavMesh. Agent will stop.");
         agent.isStopped = true;
         StopStuckCheck();
     }
+
+    public void SetDestination(Vector3 destination, float speed)
+    {
+        if (!agent.isActiveAndEnabled) return;
+
+        agent.speed = speed;
+
+        agent.SetDestination(destination);
+        agent.isStopped = false;
+        StartStuckCheck();
+    }
+
+    public void SetDestination(Vector3 destination)
+    {
+        SetDestination(destination, patrolSpeed);
+    }
+
 
     public void StopMoving()
     {
@@ -113,7 +131,6 @@ public class EnemyMovement : MonoBehaviour
         {
             if (agent.velocity.sqrMagnitude < minMoveSpeed * minMoveSpeed && agent.remainingDistance > agent.stoppingDistance)
             {
-                Debug.LogWarning("Agent appears to be stuck. Forcing new destination.");
                 SetRandomPatrolDestination();
                 yield break; // Exit coroutine
             }
