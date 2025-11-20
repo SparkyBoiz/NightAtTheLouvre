@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Dylan_Gym.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: ba434e9ece7d44042909b8571d4d55e8
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: af7d0e113dff9db41805d2f3a47486be
   m_configObjects:
