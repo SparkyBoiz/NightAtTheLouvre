@@ -20,15 +20,11 @@ public class EnemyMovement : MonoBehaviour
     [Tooltip("The radius around the enemy's anchor point to patrol.")]
     public float patrolRadius = 15f; 
 
-    [Header("Stuck Handling")]
-    public Transform playerTarget;
-
     public NavMeshAgent agent { get; private set; }
     private Coroutine stuckCheckCoroutine;
-    private Coroutine positionStuckCheckCoroutine;
 
     public System.Action OnStuck;
-    
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -68,7 +64,6 @@ public class EnemyMovement : MonoBehaviour
                 agent.SetDestination(hit.position);
                 agent.isStopped = false;
                 StartStuckCheck();
-                StartPositionStuckCheck();
                 return;
             }
         }
@@ -84,7 +79,6 @@ public class EnemyMovement : MonoBehaviour
         agent.SetDestination(destination);
         agent.isStopped = false;
         StartStuckCheck();
-        StartPositionStuckCheck();
     }
 
     public void SetDestination(Vector3 destination)
@@ -99,7 +93,6 @@ public class EnemyMovement : MonoBehaviour
         {
             agent.isStopped = true;
             StopStuckCheck();
-            StopPositionStuckCheck();
         }
     }
     
@@ -112,7 +105,6 @@ public class EnemyMovement : MonoBehaviour
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             StopStuckCheck();
-            StopPositionStuckCheck();
             return true;
         }
 
@@ -123,7 +115,6 @@ public class EnemyMovement : MonoBehaviour
     {
         StopStuckCheck();
         stuckCheckCoroutine = StartCoroutine(CheckIfStuck());
-        StartPositionStuckCheck();
     }
 
     private void StopStuckCheck()
@@ -132,21 +123,6 @@ public class EnemyMovement : MonoBehaviour
         {
             StopCoroutine(stuckCheckCoroutine);
             stuckCheckCoroutine = null;
-        }
-    }
-
-    private void StartPositionStuckCheck()
-    {
-        StopPositionStuckCheck();
-        positionStuckCheckCoroutine = StartCoroutine(CheckIfStuckByPosition());
-    }
-
-    private void StopPositionStuckCheck()
-    {
-        if (positionStuckCheckCoroutine != null)
-        {
-            StopCoroutine(positionStuckCheckCoroutine);
-            positionStuckCheckCoroutine = null;
         }
     }
 
@@ -161,34 +137,6 @@ public class EnemyMovement : MonoBehaviour
                 OnStuck?.Invoke();
             }
             yield return new WaitForSeconds(1.0f);
-        }
-    }
-
-    private IEnumerator CheckIfStuckByPosition()
-    {
-        while (agent.hasPath && !agent.pathPending)
-        {
-            Vector3 lastPosition = transform.position;
-            yield return new WaitForSeconds(3.0f);
-
-            if (agent.pathPending || !agent.hasPath || agent.isStopped)
-                yield break;
-
-            float distanceMoved = Vector3.Distance(lastPosition, transform.position);
-            if (distanceMoved < 0.1f && agent.remainingDistance > agent.stoppingDistance)
-            {
-                if (playerTarget != null)
-                {
-                    Debug.Log($"Enemy '{gameObject.name}' is stuck, teleporting towards player.");
-                    Vector3 directionToPlayer = (playerTarget.position - transform.position).normalized;
-                    Vector3 teleportPosition = transform.position + directionToPlayer * 1.0f;
-
-                    if (NavMesh.SamplePosition(teleportPosition, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
-                    {
-                        agent.Warp(hit.position);
-                    }
-                }
-            }
         }
     }
 

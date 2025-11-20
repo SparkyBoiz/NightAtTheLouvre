@@ -30,7 +30,6 @@ public class EnemyController : MonoBehaviour
     {
         health = GetComponent<EnemyHealth>();
         movement = GetComponent<EnemyMovement>();
-        movement.playerTarget = playerTarget;
 
         health.OnDie += OnEnemyDeath;
         movement.OnStuck += OnStuck;
