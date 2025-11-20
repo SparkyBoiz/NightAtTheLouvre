@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 6617664382648184503}
   - component: {fileID: 3712598612151715480}
   - component: {fileID: 7667173404570664000}
+  - component: {fileID: 5603409188297121690}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -407,6 +408,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSoundMaker
   soundInterval: 0.5
+--- !u!114 &5603409188297121690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4271471618953947460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4552865b3f24fb44981ff97d5009706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrapPlacer
+  trapPrefab: {fileID: 3350876203547594639, guid: 61ad5725312543b4e8e0a5bc5a8205b7, type: 3}
+  placeTrapAction:
+    m_Name: Place Trap
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 43fe43da-4af6-4c58-8f58-8f77998e3371
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c01f0194-819e-4a5c-9746-4fdda853866f
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Place Trap
+      m_Flags: 0
+    m_Flags: 0
+  pickupTrapAction:
+    m_Name: Pickup Trap
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e5e39c48-33a8-48fd-9ab0-de8d0d9ef5b8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 60016906-6a80-4ef0-9a88-24d46c1769bb
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pickup Trap
+      m_Flags: 0
+    m_Flags: 0
+  maxTraps: 3
+  trapPlacementCooldown: 5
 --- !u!1 &5834558145675172115
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,6 +998,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4239165379000543631, guid: 1870f81f605653542b42a6478978b9fe, type: 3}
+      propertyPath: 'textures.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 042232c69455cc84e9ec5c69bbc25af5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
