@@ -61,6 +61,7 @@ public class EnemyController : MonoBehaviour
         switch (currentState)
         {
             case State.Patrol:
+            
                 if (!hasTreasure)
                 {
                     LookForTreasure();

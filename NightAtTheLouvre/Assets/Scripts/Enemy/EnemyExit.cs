@@ -21,6 +21,7 @@ public class EnemyExit : MonoBehaviour
                     {
                         SceneManager.LoadScene(treasure.gameOverSceneName);
                     }
+
                     Treasure.IncrementStolenTreasureCount();
                 }
 
