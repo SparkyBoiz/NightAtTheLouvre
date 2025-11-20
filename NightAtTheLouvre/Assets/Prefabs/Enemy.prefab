@@ -243,6 +243,7 @@ MonoBehaviour:
   minMoveSpeed: 0.1
   stoppingDistance: 0.5
   patrolRadius: 10
+  playerTarget: {fileID: 9002153703602390536, guid: cf1c01e987ac594449880f9d99922214, type: 3}
 --- !u!114 &7668380420684158389
 MonoBehaviour:
   m_ObjectHideFlags: 0
